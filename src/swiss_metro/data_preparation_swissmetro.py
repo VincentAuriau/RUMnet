@@ -6,9 +6,13 @@ Created on Mon Mar  6 09:44:24 2023
 @author: aaouad
 """
 
+import os
+from pathlib import Path
+
 import pandas as pd 
 import numpy as np
 
+path = Path(__file__).parent.absolute()
 
 
 def data_swissmetro():
@@ -17,7 +21,7 @@ def data_swissmetro():
     '''
 
     ## Loading the data"
-    raw_data = pd.read_csv('./data/Swissmetro/swissmetro.dat',sep='\t')
+    raw_data = pd.read_csv(os.path.join(path, '../../data/Swissmetro/swissmetro.csv'))
     raw_data["CAR_HE"] = 0
     
     c_features = ["GROUP", "PURPOSE", "FIRST", "TICKET", "WHO", "LUGGAGE", "AGE", "MALE", "INCOME", "GA", "ORIGIN", "DEST"]
