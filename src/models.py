@@ -19,6 +19,22 @@ def create_model(paramsArchitecture, paramsGeneral, paramsExperiment):
     return model
 
 
+def create_model_enh(model_class, model_hyperparams):
+    if model_class == "MNL":
+        model = MNLModel(**model_hyperparams)
+    elif model_class == "mixDeepMNL":
+        model = mixDeepMNL(**model_hyperparams)
+    elif model_class == "RUMnet":
+        model = RUMModel(**model_hyperparams)
+    elif model_class == "TasteNet":
+        model = TasteNet(**model_hyperparams)
+    elif model_class == "NN":
+        model = VanillaNN(**model_hyperparams)
+    else:
+        raise ValueError(f"Model class {model_class} not implemented")
+    return model
+
+
 class MNLModel(tf.keras.Model):
     def __init__(self, paramsArchitecture, paramsGeneral, paramsExperiment):
         super(MNLModel, self).__init__()
