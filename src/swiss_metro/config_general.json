@@ -1,22 +1,18 @@
-
 {
     "seed": 1234,
-    
     "training": {
-        "earlyStopping" : true,
-        "numberEpochs" : 2000, 
-        "regularization" : 0,
-        "learningRate" : 0.001,
-        "batchSize" : 32,
-        "tol" : 0,
-        "label_smoothing" : 0.01,
+        "earlyStopping": true,
+        "numberEpochs": 2000,
+        "regularization": 0,
+        "learningRate": 0.001,
+        "batchSize": 32,
+        "tol": 0,
+        "label_smoothing": 0.01,
         "early_stopping_patience": 300
     },
-    
     "crossVal": {
         "numberFold": 10,
         "fractionTest": 0.1,
         "fractionVal": 0.1
     }
-    
 }
