@@ -584,11 +584,19 @@ def cross_validate(X, Y, paramsGeneral, paramsArchitecture, paramsExperiment):
 
 
 def cross_validate_enh(
-    X, Y, model_class, model_hyperparams, fit_params, n_folds, test_size, val_size, assortment_size, save_dir
+    X,
+    Y,
+    model_class,
+    model_hyperparams,
+    fit_params,
+    n_folds,
+    test_size,
+    val_size,
+    assortment_size,
+    save_dir,
 ):
     data_rows = []
 
-    assortment_size += 1
     for i in range(n_folds):
         print("Starting cross fold number {}.".format(i + 1))
 
@@ -638,13 +646,17 @@ def cross_validate_enh(
 
         else:
             #### model fit
+            print(Yval.shape, Yval_ohe.shape)
+            print(Ytrain.shape, Ytrain_ohe.shape)
+            print(Ytest.shape, Ytest_ohe.shape)
             model, history, time_fit, stopped_epoch = model_fit_enh(
                 Xtrain=Xtrain,
                 Xval=Xval,
                 Ytrain=Ytrain_ohe,
                 Yval=Yval_ohe,
                 model_class=model_class,
-                model_hyperparams=model_hyperparams**fit_params,
+                model_hyperparams=model_hyperparams,
+                **fit_params,
             )
 
             save_plot_training(model, history, save_dir, f"{i}")

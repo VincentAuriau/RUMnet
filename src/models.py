@@ -25,7 +25,7 @@ def create_model_enh(model_class, model_hyperparams):
     elif model_class == "mixDeepMNL":
         model = mixDeepMNL(**model_hyperparams)
     elif model_class == "RUMnet":
-        model = RUMModel(**model_hyperparams)
+        model = RUMModel_enh(**model_hyperparams)
     elif model_class == "TasteNet":
         model = TasteNet(**model_hyperparams)
     elif model_class == "NN":
@@ -386,16 +386,16 @@ class RUMModel_enh(tf.keras.Model):
         depth_eps_x,
         width_eps_x,
         heterogeneity_x,
-        depth_eps_z,
-        width_eps_z,
-        heterogeneity_z,
-        depth_u,
-        width_u,
+        depth_eps_z=0,
+        width_eps_z=0,
+        heterogeneity_z=1,
+        depth_u=1,
+        width_u=10,
         # training hyperparameters
-        tol,
-        regularization,
+        tol=0.0,
+        regularization=0.0,
     ):
-        super(RUMModel, self).__init__()
+        super(RUMModel_enh, self).__init__()
         self.assortment_size = assortment_size
 
         self.depth_eps_x = depth_eps_x
