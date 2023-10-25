@@ -3,9 +3,6 @@
 
 import os
 
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
 import joblib
 import pickle
 import tensorflow as tf
@@ -15,8 +12,6 @@ import numpy as np
 import csv
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.backend import count_params
-
-print("Num GPUs Available: ", len(tf.config.list_physical_devices("GPU")))
 
 from matplotlib import pyplot as plt
 import time
@@ -362,6 +357,7 @@ def model_fit_enh(
 
     ###### Fitting model
     start = time.time()
+    print("starting fit for real")
     history = model.fit(
         Xtrain,
         Ytrain,
@@ -388,7 +384,7 @@ def save_plot_training(model, history, save_directory, save_name):
 
     ###### Save history
     hist_df = pd.DataFrame(history.history)
-    hist_csv_file = os.path.join(save_directory, "/history_" + save_name + ".csv")
+    hist_csv_file = os.path.join(save_directory, "history_" + save_name + ".csv")
     with open(hist_csv_file, mode="w") as f:
         hist_df.to_csv(f)
 
@@ -649,6 +645,7 @@ def cross_validate_enh(
             print(Yval.shape, Yval_ohe.shape)
             print(Ytrain.shape, Ytrain_ohe.shape)
             print(Ytest.shape, Ytest_ohe.shape)
+            print("Fit Starting")
             model, history, time_fit, stopped_epoch = model_fit_enh(
                 Xtrain=Xtrain,
                 Xval=Xval,
